@@ -1,42 +1,36 @@
 package main
-
+// import "bufio"
 import (
-	"fmt"
-	"strings"
+        "fmt"
+        "bufio"
+        "os"
 )
-
-import (
-	"readline"
-)
-
-// read
-func READ(str string) string {
-	return str
-}
-
-// eval
-func EVAL(ast string, env string) string {
-	return ast
-}
-
-// print
-func PRINT(exp string) string {
-	return exp
-}
-
-// repl
-func rep(str string) string {
-	return PRINT(EVAL(READ(str), ""))
-}
 
 func main() {
-	// repl loop
-	for {
-		text, err := readline.Readline("user> ")
-		text = strings.TrimRight(text, "\n")
-		if err != nil {
-			return
-		}
-		fmt.Println(rep(text))
-	}
+  scanner := bufio.NewScanner(os.Stdin)
+  fmt.Print("user> ")
+
+  for scanner.Scan() {
+    line := scanner.Text()
+    fmt.Println(rep(line));
+    fmt.Print("user> ")
+  }
+
+  return;
+}
+
+func rep(input string) string {
+  return PRINT(EVAL(READ(input)));
+}
+
+func READ(input string) string {
+  return input;
+}
+
+func EVAL(input string) string {
+  return input;
+}
+
+func PRINT(input string) string {
+  return input;
 }
