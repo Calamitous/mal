@@ -1,66 +1,37 @@
 package main
-
+// import "bufio"
 import (
-	"fmt"
-	"strings"
+        "fmt"
+        "bufio"
+        "os"
+        "reader"
 )
-
-import (
-	"printer"
-	"reader"
-	"readline"
-	. "types"
-)
-
-// read
-func READ(str string) (MalType, error) {
-	return reader.Read_str(str)
-}
-
-// eval
-func EVAL(ast MalType, env string) (MalType, error) {
-	return ast, nil
-}
-
-// print
-func PRINT(exp MalType) (string, error) {
-	return printer.Pr_str(exp, true), nil
-}
-
-// repl
-func rep(str string) (MalType, error) {
-	var exp MalType
-	var res string
-	var e error
-	if exp, e = READ(str); e != nil {
-		return nil, e
-	}
-	if exp, e = EVAL(exp, ""); e != nil {
-		return nil, e
-	}
-	if res, e = PRINT(exp); e != nil {
-		return nil, e
-	}
-	return res, nil
-}
 
 func main() {
-	// repl loop
-	for {
-		text, err := readline.Readline("user> ")
-		text = strings.TrimRight(text, "\n")
-		if err != nil {
-			return
-		}
-		var out MalType
-		var e error
-		if out, e = rep(text); e != nil {
-			if e.Error() == "<empty line>" {
-				continue
-			}
-			fmt.Printf("Error: %v\n", e)
-			continue
-		}
-		fmt.Printf("%v\n", out)
-	}
+  scanner := bufio.NewScanner(os.Stdin)
+  fmt.Print("user> ")
+
+  for scanner.Scan() {
+    line := scanner.Text()
+    fmt.Println(rep(line));
+    fmt.Print("user> ")
+  }
+
+  return;
+}
+
+func rep(input string) string {
+  return PRINT(EVAL(READ(input)));
+}
+
+func READ(input string) string {
+  return reader.Read_str(input);
+}
+
+func EVAL(input string) string {
+  return input;
+}
+
+func PRINT(input string) string {
+  return input;
 }
