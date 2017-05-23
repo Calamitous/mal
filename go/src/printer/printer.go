@@ -3,9 +3,7 @@ package printer
 import (
 	"fmt"
 	"strings"
-)
 
-import (
 	"types"
 )
 
