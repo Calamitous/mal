@@ -1,37 +1,35 @@
 package main
+
 // import "bufio"
 import (
-        "fmt"
-        "bufio"
-        "os"
-        "reader"
+	"fmt"
+	"reader"
 )
 
 func main() {
-  scanner := bufio.NewScanner(os.Stdin)
-  fmt.Print("user> ")
+	fmt.Print("user> ")
 
-  for scanner.Scan() {
-    line := scanner.Text()
-    fmt.Println(rep(line));
-    fmt.Print("user> ")
-  }
+	for {
+		line := "( 1 2 3)"
+		fmt.Println(rep(line))
+		fmt.Print("user> ")
+	}
 
-  return;
+	return
 }
 
 func rep(input string) string {
-  return PRINT(EVAL(READ(input)));
+	return PRINT(EVAL(READ(input)))
 }
 
 func READ(input string) string {
-  return reader.Read_str(input);
+	return reader.Read_str(input)
 }
 
 func EVAL(input string) string {
-  return input;
+	return input
 }
 
 func PRINT(input string) string {
-  return input;
+	return input
 }
